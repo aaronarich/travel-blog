@@ -1,0 +1,178 @@
+
+// Application css
+html {
+  font-family:tahoma;
+  font-size:12px;
+  -webkit-transition: all   .9s ease-in-out;
+  -moz-transition: all    .9s ease-in-out;
+  -ms-transition: all     .9s ease-in-out;
+  -o-transition: all      .9s ease-in-out;
+  transition: all       .9s ease-in-out;
+
+}
+
+// Typography
+.wf-loading {
+    visibility: hidden;
+}
+
+h1 {
+  margin-bottom:15px;
+  font-size:20px;
+  font-weight:300;
+}
+
+p {
+  margin-bottom:15px;
+
+}
+
+$break-small: 700px;
+
+.wrapper {
+  padding-bottom: 150px;
+
+  @media screen and (max-width: $break-small) {
+      padding-left:10px;
+      padding-right:10px;
+  }
+}
+
+.header {
+  text-align:center;
+
+  .logo {
+    padding: 150px 0;
+
+    @media screen and (max-width: $break-small) {
+        padding: 50px 0;
+    }
+
+    img {
+      margin-bottom:12px;
+    }
+  }
+}
+
+img {
+  max-width:100%;
+  height:auto;
+}
+
+.btn {
+  background-color: #000;
+  padding:50px;
+  font-size:16px;
+  text-decoration:none;
+}
+
+.load-more {
+  text-decoration: none;
+  color: #fff;
+  border-radius: 2px;
+  background-color: #000;
+  padding: 16px 0px;
+  text-align:center;
+  font-size: 16px;
+  width:185px;
+  margin:0 auto;
+}
+
+.like-btn {
+  position: fixed;
+  top:20px;
+  left:20px;
+
+  @media screen and (max-width: $break-small) {
+      display:none !important;
+  }
+}
+
+.scroll-top {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: none;
+  height: 15px;
+  background-image: url("../images/arrow.png");
+  padding: 0px 24px 9px 0;
+  background-repeat: no-repeat;
+  background-position: right;
+  font-size: 16px;
+
+  @media screen and (max-width: $break-small) {
+      display:none !important;
+  }
+}
+
+.scroll-top:hover{
+  cursor:pointer;
+};
+
+// Clearfix
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+ul.pics {
+  max-width:612px;
+  margin: 0 auto;
+}
+
+li {
+  margin-top: 0;
+  padding-bottom:200px;
+  clear:both;
+  list-style: none;
+  position: relative;
+  text-align: center;
+  font-size:16px;
+
+  // Mobile devices
+  @media screen and (max-width: $break-small) {
+      padding-bottom:75px;
+  }
+
+  img {
+    border-radius: 2px;
+  }
+
+  .face-map {
+    // Went over usage limits for today
+    //display:none;
+  }
+
+  .meta {
+    margin-top:-6px;
+  }
+
+  .info {
+    margin-top: 35px;
+
+    // Mobile devices
+    @media screen and (max-width: $break-small) {
+        margin-top:15px;
+    }
+  }
+
+  .location, .date {
+    color:#999;
+  }
+
+  .date {
+
+  }
+}
+
+li:last-child {
+  padding-bottom:150px;
+}
+
+.first-load {
+  width:32px;
+  height:32px;
+  background-image:url('../images/first-load.gif');
+  margin:50px auto 600px;
+}
