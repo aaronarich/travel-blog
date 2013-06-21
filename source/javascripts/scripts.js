@@ -15,6 +15,9 @@ $(function() {
     return time;
   }
 
+  // Hover over map to change image
+
+
   // The initial request URL
   var reqURL = "https://api.instagram.com/v1/users/14989250/media/recent/?access_token=14989250.a1982d7.a9539f2ed5744019b8bcf46a876152df";
 
@@ -70,7 +73,7 @@ $(function() {
             // Date posted
             var datePosted = timeConverter(data.data[i].created_time);
             datePosted = "<span class='date'>" + datePosted + "</span> ";
-            
+
             $(".pics").append(
               "<li class='group'>" +
                 "<div class='image'>" +
@@ -104,6 +107,7 @@ $(function() {
   // Load most recent photos
   loadInsta(reqURL);
 
+
   // Load more button
   $('.load-more').click(function(){
     console.log('next page: ' + nextPage);
@@ -120,49 +124,9 @@ $(function() {
     return false;
   });
 
-  // Global vars
-  var mastHeight = 526;
-  var mastheadWrap = $('.header .logo');
-  var animSpeed = 10;
-  var ua = navigator.userAgent;
-  var uaCheck = {
-    ios:        ua.match(/(iPhone|iPod|iPad)/),
-    blackberry: ua.match(/BlackBerry/),
-    android:    ua.match(/Android/)
-  };
-
-  // Parallax scrolling/opacity transition for the header
-  function fancyHeader(){
-      // define some globals for our methods to hit
-      var scrollDist = $(window).scrollTop(),
-      docH = $(document).height(),
-      opacityNum = 1 - (scrollDist * (1/100)),
-      positionNum = 150 - Math.floor(scrollDist * 1);
-    
-      // moving the header around
-      if (positionNum <= mastHeight) {
-        mastheadWrap.css({
-          'padding' : positionNum + 'px 0'
-        });
-      }
-
-      // fading master wrap
-      if (opacityNum > 1) {
-        opacityNum = 1;
-      }
-      if (opacityNum <= 1 && opacityNum >= 0) {
-        mastheadWrap.css('opacity', opacityNum);
-      }
-    }
-
 
   $(window).scroll(function () {
 
-    // we dont care about this stuff on mobile devices
-    if (uaCheck.ios || uaCheck.blackberry || uaCheck.android) return;
-
-    // Call fancy header
-    fancyHeader();
 
     // Show scroll top button after user starts to scroll
     var fromTop = $(window).scrollTop();
