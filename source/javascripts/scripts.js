@@ -15,6 +15,9 @@ $(function() {
     return time;
   }
 
+  // Hover over map to change image
+
+
   // The initial request URL
   var reqURL = "https://api.instagram.com/v1/users/14989250/media/recent/?access_token=14989250.a1982d7.a9539f2ed5744019b8bcf46a876152df";
 
@@ -104,6 +107,7 @@ $(function() {
   // Load most recent photos
   loadInsta(reqURL);
 
+
   // Load more button
   $('.load-more').click(function(){
     console.log('next page: ' + nextPage);
@@ -119,6 +123,7 @@ $(function() {
     $("html, body").animate({ scrollTop: 0 }, "slow");
     return false;
   });
+
 
   $(window).scroll(function () {
 
