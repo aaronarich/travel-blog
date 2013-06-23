@@ -41,22 +41,31 @@ $(function() {
           // Loop through the photos
           for (var i = 0; i < count; i++) {
 
+            if (data.data[i].location === null){
+              data.data[i].location = {
+                latitude: 0.0000,
+                longitude: 90.0000
+              };
+            }
+
+            var latitude = data.data[i].location.latitude;
+            var longitude = data.data[i].location.longitude;
+
             // Google static map api
             var mapClose = 'http://maps.googleapis.com/maps/api/staticmap?' +
-                      'center=' + data.data[i].location.latitude + ',' + data.data[i].location.longitude + '&' +
+                      'center=' + latitude + ',' + longitude + '&' +
                       'zoom=12&' +
                       'size=612x100&' +
-                      // Cant get custom icon to work. Fix this first
-                      'markers=icon:http://i.imgur.com/QbSul.png%7Cshadow:false%7C' + data.data[i].location.latitude + ',' + data.data[i].location.longitude + '&' +
+                      'markers=icon:http://i.imgur.com/QbSul.png%7Cshadow:false%7C' + latitude + ',' + longitude + '&' +
                       'sensor=true';
 
             // Google static map api
             var mapFar = 'http://maps.googleapis.com/maps/api/staticmap?' +
-                      'center=' + data.data[i].location.latitude + ',' + data.data[i].location.longitude + '&' +
+                      'center=' + latitude + ',' + longitude + '&' +
                       'zoom=4&' +
                       'size=612x100&' +
                       // Cant get custom icon to work. Fix this first
-                      'markers=icon:http://i.imgur.com/QbSul.png%7Cshadow:false%7C' + data.data[i].location.latitude + ',' + data.data[i].location.longitude + '&' +
+                      'markers=icon:http://i.imgur.com/QbSul.png%7Cshadow:false%7C' + latitude + ',' + longitude + '&' +
                       'sensor=true';
 
             // Photo Link
@@ -105,18 +114,29 @@ $(function() {
 
           // Get url to load more photos
           window.nextPage = data.pagination.next_url;
-          $('.load-more').html('Load More');
+          console.log(nextPage);
+          $('.load-more').click(function(){
+            // console.log('next page: ' + nextPage);
+            $(this).html('<img src="images/ajax-loader.gif" />');
+            loadInsta(nextPage);
+            return false;
+          });
+
+
           if ($('li').length > 0){
             $('.first-load').hide();
           }
+        },
+        complete: function(){
+          $('.load-more').html('Load More');
         }
     });
 
     // we dont care about this stuff on mobile devices
-    if (uaCheck.ios || uaCheck.blackberry || uaCheck.android) return;
-
-    // Run function to show detailed map on hover
-    showMapDetail();
+    if (!uaCheck.ios || !uaCheck.blackberry || !uaCheck.android) {
+      // Run function to show detailed map on hover
+      showMapDetail();
+    }
   }
 
   function showMapDetail() {
@@ -134,17 +154,6 @@ $(function() {
     }, '.face-map');
   }
 
-  // Load most recent photos
-  loadInsta(reqURL);
-
-  // Load more button
-  $('.load-more').click(function(){
-    console.log('next page: ' + nextPage);
-    $(this).html('<img src="images/ajax-loader.gif" />');
-    loadInsta(nextPage);
-    return false;
-  });
-
   // Scroll back to top button
   $(".scroll-top").click(function() {
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -160,4 +169,8 @@ $(function() {
       $(".scroll-top").fadeOut(300);
     }
   });
+
+  // Load most recent photos
+  loadInsta(reqURL);
+
 });
