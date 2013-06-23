@@ -1,5 +1,13 @@
 $(function() {
 
+  // Mobile detection
+  var ua = navigator.userAgent;
+  var uaCheck = {
+    ios:        ua.match(/(iPhone|iPod|iPad)/),
+    blackberry: ua.match(/BlackBerry/),
+    android:    ua.match(/Android/)
+  };
+
   // Convert unix timestamp
   function timeConverter(UNIX_timestamp){
     var a = new Date(UNIX_timestamp*1000);
@@ -103,6 +111,9 @@ $(function() {
           }
         }
     });
+
+    // we dont care about this stuff on mobile devices
+    if (uaCheck.ios || uaCheck.blackberry || uaCheck.android) return;
 
     // Run function to show detailed map on hover
     showMapDetail();
